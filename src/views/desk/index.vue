@@ -24,7 +24,7 @@
       <div class="item">
         <a-button type="primary" @click="onSearch">搜索</a-button>
         <a-button type="primary" @click="onRest">重置</a-button>
-        <a-button type="primary" @click="add">新增</a-button>
+        <a-button type="primary" @click="add()">新增</a-button>
       </div>
     </header>
     <div class="total">
@@ -140,10 +140,11 @@ export default {
       current: null,
       loading: false
     });
-    const addForm: any = reactive({
-      price: 0,
+    const addForm = reactive({
+      price: "0",
       desc: "",
-      name: ""
+      name: "",
+      id: ""
     });
     const ruleForm = ref(null);
     async function onSearch() {
@@ -182,10 +183,10 @@ export default {
               if (code === 200) {
                 message.success("操作成功！");
                 state.visible = false;
+                onSearch();
               } else {
                 message.error("操作失败！");
               }
-              onSearch();
             });
           })
           .catch(() => {});
@@ -198,14 +199,14 @@ export default {
       if (current) {
         const { price, desc, name, id } = current as any;
         setValue(addForm, {
-          price,
+          price: price + "",
           desc,
           name,
           id
         });
       } else {
         setValue(addForm, {
-          price: 0,
+          price: "0",
           desc: "",
           name: "",
           id: ""
@@ -214,7 +215,12 @@ export default {
     }
 
     function onBlur() {
-      addForm.price = Number(addForm.price) + "";
+      const num = Number(addForm.price);
+      if (isNaN(num)) {
+        addForm.price = "0";
+      } else {
+        addForm.price = num + "";
+      }
     }
 
     function onRest() {
