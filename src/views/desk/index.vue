@@ -101,9 +101,8 @@
 </template>
 
 <script lang="ts">
-import { addCommas } from "@/utils/tool";
 import { saveData, getData, getOne, deleteOne } from "@/api/desk";
-import { onMounted, ref, Ref, reactive, toRefs } from "vue";
+import { onMounted, ref, reactive, toRefs } from "vue";
 import { message } from "ant-design-vue";
 import { setValue } from "@/utils/tool";
 export default {
