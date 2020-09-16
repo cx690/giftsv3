@@ -68,7 +68,7 @@
       :confirm-loading="confirmLoading"
     >
       <a-form
-        :ref="el=>{ruleForm = el}"
+        ref="ruleForm"
         :model="addForm"
         :rules="rules"
         :labelCol="{span:4}"
