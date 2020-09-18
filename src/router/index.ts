@@ -11,10 +11,10 @@ const routes: Array<RouteRecordRaw> = [
     path: "/404",
     name: "404",
     // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
+    // this generates a separate chunk (404.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/404.vue")
+      import(/* webpackChunkName: "404" */ "../views/404.vue")
   },
   // {
   //   path: "/demo",
