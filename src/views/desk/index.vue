@@ -145,6 +145,12 @@ export default {
         pageSize: 10
       },
       total: 0,
+      addForm: {
+        price: "0",
+        desc: "",
+        name: "",
+        id: ""
+      },
       rules: {
         name: [
           {
@@ -165,12 +171,6 @@ export default {
       confirmLoading: false,
       current: null,
       loading: false
-    });
-    const addForm = reactive({
-      price: "0",
-      desc: "",
-      name: "",
-      id: ""
     });
     const ruleForm = ref(null);
     async function onSearch() {
@@ -204,7 +204,7 @@ export default {
         const vm: any = ruleForm.value;
         vm.validate()
           .then(() => {
-            saveData(addForm).then(res => {
+            saveData(state.addForm).then(res => {
               const { code } = res;
               if (code === 200) {
                 message.success("操作成功！");
@@ -224,28 +224,28 @@ export default {
       state.visible = true;
       if (current) {
         const { price, desc, name, id } = current as any;
-        setValue(addForm, {
+        state.addForm = {
           price: price + "",
           desc,
           name,
           id
-        });
+        };
       } else {
-        setValue(addForm, {
+        state.addForm = {
           price: "0",
           desc: "",
           name: "",
           id: ""
-        });
+        };
       }
     }
 
     function onBlur() {
-      const num = Number(addForm.price);
+      const num = Number(state.addForm.price);
       if (isNaN(num)) {
-        addForm.price = "0";
+        state.addForm.price = "0";
       } else {
-        addForm.price = num + "";
+        state.addForm.price = num + "";
       }
     }
 
@@ -266,7 +266,6 @@ export default {
       add,
       onBlur,
       onRest,
-      addForm,
       ruleForm
     };
   }

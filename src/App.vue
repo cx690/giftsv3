@@ -1,11 +1,11 @@
 <template>
   <a-config-provider :locale="locale">
     <router-view #default="{ Component }">
-      <transition>
+      <!-- <transition> -->
         <keep-alive>
           <component :is="Component" />
         </keep-alive>
-      </transition>
+      <!-- </transition> -->
     </router-view>
   </a-config-provider>
 </template>
