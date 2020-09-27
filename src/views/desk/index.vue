@@ -131,7 +131,6 @@
 import { saveData, getData, getOne, deleteOne } from "@/api/desk";
 import { onMounted, ref, reactive, toRefs } from "vue";
 import { message } from "ant-design-vue";
-import { setValue } from "@/utils/tool";
 export default {
   name: "demo",
   setup() {
