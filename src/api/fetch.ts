@@ -1,3 +1,4 @@
+import { message } from "ant-design-vue";
 const fetchDefault = {
   method: "GET",
   cache: "no-cache",
@@ -46,11 +47,11 @@ export default function fetch(url: string, data = {}, opt = {}) {
         const res = response.json() || {};
         return res;
       }
-      console.error("服务器繁忙，请稍后再试！");
       throw new Error(response.statusText);
     })
     .catch(err => {
       console.error("Fetch Error : %s", err);
+      message.error("服务器繁忙，请稍后再试！");
       return {};
       // throw new Error(err);
     });
