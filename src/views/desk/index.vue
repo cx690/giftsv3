@@ -16,8 +16,8 @@
           v-model:value="form.time"
           valueFormat="YYYY-MM-DD HH:mm"
           :showTime="{
-					format:'HH:mm'
-				}"
+            format: 'HH:mm'
+          }"
           format="YYYY-MM-DD HH:mm"
         />
       </div>
@@ -29,31 +29,54 @@
     </header>
     <div class="total">
       <span>合计金额：￥</span>
-      <span style="color: red;font-size: 16px;">{{total}}</span>
+      <span style="color: red;font-size: 16px;">{{ total }}</span>
       <span style="margin-left:20px">共计：</span>
-      <span>{{data.length}} 条数据</span>
+      <span>{{ data.length }} 条数据</span>
     </div>
     <div class="content">
       <a-spin :spinning="loading" size="large">
-        <a-table :data-source="data" :pagination="pagination" rowKey="id" bordered>
+        <a-table
+          :data-source="data"
+          :pagination="pagination"
+          rowKey="id"
+          bordered
+        >
           <a-table-column key="name" title="姓名" data-index="name" />
           <a-table-column key="price" title="金额" data-index="price" />
           <a-table-column key="desc" title="备注" data-index="desc" />
-          <a-table-column key="createdAt" title="创建时间" data-index="createdAt" width="200px">
+          <a-table-column
+            key="createdAt"
+            title="创建时间"
+            data-index="createdAt"
+            width="200px"
+          >
             <template #default="{text}">
-              <span>{{$moment(text).format('YYYY-MM-DD HH:mm:ss')}}</span>
+              <span>{{ $moment(text).format("YYYY-MM-DD HH:mm:ss") }}</span>
             </template>
           </a-table-column>
-          <a-table-column key="updatedAt" title="修改时间" data-index="updatedAt" width="200px">
+          <a-table-column
+            key="updatedAt"
+            title="修改时间"
+            data-index="updatedAt"
+            width="200px"
+          >
             <template #default="{text}">
-              <span>{{$moment(text).format('YYYY-MM-DD HH:mm:ss')}}</span>
+              <span>{{ $moment(text).format("YYYY-MM-DD HH:mm:ss") }}</span>
             </template>
           </a-table-column>
-          <a-table-column key="action" title="操作" data-index="action" width="300px">
+          <a-table-column
+            key="action"
+            title="操作"
+            data-index="action"
+            width="300px"
+          >
             <template #default="{record}">
-              <a-popconfirm title="确定要删除数据吗？" @confirm="deleteItem(record.id)">
-                <a-button type="danger">删除</a-button>
-              </a-popconfirm>&nbsp;&nbsp;
+              <a-popconfirm
+                title="确定要删除数据吗？"
+                @confirm="deleteItem(record.id)"
+              >
+                <a-button type="danger">删除</a-button> </a-popconfirm
+              >&nbsp;&nbsp;
               <a-button type="primary" @click="add(record)">修改</a-button>
             </template>
           </a-table-column>
@@ -61,7 +84,7 @@
       </a-spin>
     </div>
     <a-modal
-      :title="current?'修改数据':'新增数据'"
+      :title="current ? '修改数据' : '新增数据'"
       :visible="visible"
       @ok="save"
       @cancel="visible = false"
@@ -71,11 +94,15 @@
         ref="ruleForm"
         :model="addForm"
         :rules="rules"
-        :labelCol="{span:4}"
-        :wrapperCol="{span:16}"
+        :labelCol="{ span: 4 }"
+        :wrapperCol="{ span: 16 }"
       >
         <a-form-item name="name" label="名称">
-          <a-input v-model:value="addForm.name" placeholder="请输姓名" class="input" />
+          <a-input
+            v-model:value="addForm.name"
+            placeholder="请输姓名"
+            class="input"
+          />
         </a-form-item>
         <a-form-item name="price" label="金额">
           <a-input
@@ -148,12 +175,12 @@ export default {
     const ruleForm = ref(null);
     async function onSearch() {
       state.loading = true;
-      const { code, data, message, total = 0 } = await getData(state.form);
+      const { code, data, message: msg, total = 0 } = await getData(state.form);
       state.loading = false;
       if (code === 200) {
         state.data = data;
       } else if (message) {
-        message.error(message);
+        message.error(msg);
       }
       state.total = total;
     }

@@ -29,7 +29,12 @@ function paramFilter(params: { [index: string]: any }) {
   return result;
 }
 
-export default function fetch(url: string, data = {}, opt = {}) {
+export default function fetch(url: string, data = {}, opt = {}): Promise<{
+  code?: number,
+  message?: string,
+  data: any,
+  [prop: string]: any,
+}> {
   const options: any = Object.assign({}, fetchDefault, opt);
   options.method = options.method.toUpperCase();
   if (options.method === "GET" || options.method === "HEAD") {
