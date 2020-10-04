@@ -43,6 +43,9 @@
         >
           <a-table-column key="name" title="姓名" data-index="name" />
           <a-table-column key="price" title="金额" data-index="price" />
+          <a-table-column key="statusStr" title="状态" data-index="statusStr" />
+          <a-table-column key="payStr" title="支付方式" data-index="payStr" />
+          <a-table-column key="siginStr" title="性质" data-index="siginStr" />
           <a-table-column key="desc" title="备注" data-index="desc" />
           <a-table-column
             key="createdAt"
@@ -104,6 +107,51 @@
             class="input"
           />
         </a-form-item>
+        <a-form-item name="status" label="到场状态">
+          <a-radio-group
+            name="sigin"
+            default-value="0"
+            v-model:value="addForm.status"
+          >
+            <a-radio value="0">
+              未到场
+            </a-radio>
+            <a-radio value="1">
+              已到场
+            </a-radio>
+            <a-radio value="2">
+              未知
+            </a-radio>
+          </a-radio-group>
+        </a-form-item>
+        <a-form-item label="性质">
+          <a-radio-group
+            name="sigin"
+            default-value="0"
+            v-model:value="addForm.sigin"
+          >
+            <a-radio value="0">
+              无
+            </a-radio>
+            <a-radio value="1">
+              还礼
+            </a-radio>
+          </a-radio-group>
+        </a-form-item>
+        <a-form-item name="pay" label="支付方式">
+          <a-radio-group
+            name="pay"
+            default-value="0"
+            v-model:value="addForm.pay"
+          >
+            <a-radio value="0">
+              现金
+            </a-radio>
+            <a-radio value="1">
+              移动支付
+            </a-radio>
+          </a-radio-group>
+        </a-form-item>
         <a-form-item name="price" label="金额">
           <a-input
             type="number"
@@ -148,7 +196,10 @@ export default {
         price: "0",
         desc: "",
         name: "",
-        id: ""
+        id: "",
+        sigin: "0",
+        status: "0",
+        pay: "0"
       },
       rules: {
         name: [
@@ -222,19 +273,25 @@ export default {
       state.current = current;
       state.visible = true;
       if (current) {
-        const { price, desc, name, id } = current as any;
+        const { price, desc, name, id, status, sigin, pay } = current as any;
         state.addForm = {
           price: price + "",
           desc,
           name,
-          id
+          id,
+          status,
+          sigin,
+          pay
         };
       } else {
         state.addForm = {
           price: "0",
           desc: "",
           name: "",
-          id: ""
+          id: "",
+          sigin: "0",
+          status: "0",
+          pay: "0"
         };
       }
     }
