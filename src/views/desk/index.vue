@@ -41,8 +41,14 @@
           rowKey="id"
           bordered
         >
-          <a-table-column key="name" title="姓名" data-index="name" />
-          <a-table-column key="price" title="金额" data-index="price" />
+          <a-table-column key="name" title="姓名" data-index="name" :width="200"/>
+          <a-table-column
+            key="price"
+            :sorter="(a, b) => a.price - b.price"
+            title="金额"
+            data-index="price"
+            :width="150"
+          />
           <a-table-column key="statusStr" title="状态" data-index="statusStr" />
           <a-table-column key="payStr" title="支付方式" data-index="payStr" />
           <a-table-column key="siginStr" title="性质" data-index="siginStr" />
