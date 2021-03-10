@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
-const routes: Array<RouteRecordRaw> = [
+const routes: RouteRecordRaw[] = [
   {
     path: "/",
     name: "Desk",
@@ -30,7 +30,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.meta.title) {
-    document.title = to.meta.title
+    window.document.title = (to.meta.title as string)
   }
   if (to.matched.length === 0) {
     from.name ? next({
