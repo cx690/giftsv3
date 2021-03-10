@@ -236,7 +236,7 @@ export default {
       if (code === 200) {
         state.data = data;
       } else if (message) {
-        message.error(msg);
+        msg && message.error(msg);
       }
       state.total = total;
     }
