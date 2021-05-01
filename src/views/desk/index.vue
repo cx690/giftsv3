@@ -5,6 +5,14 @@
             <div class="item">
                 <a-input v-model:value="form.kw" placeholder="请输入关键字" style="width: 200px" @keyup.enter="onSearch" />
             </div>
+            <span class="title">性质：</span>
+            <div class="item">
+                <a-select v-model:value="form.sigin" style="width:100px" allowClear>
+                    <a-select-option value="0">无</a-select-option>
+                    <a-select-option value="1">还礼</a-select-option>
+                    <a-select-option value="2">小孩收礼</a-select-option>
+                </a-select>
+            </div>
             <span class="title">创建时间：</span>
             <div class="item">
                 <a-range-picker v-model:value="form.time" valueFormat="YYYY-MM-DD HH:mm" :showTime="{
@@ -59,7 +67,7 @@
                     <a-input v-model:value="addForm.name" placeholder="请输姓名" class="input" />
                 </a-form-item>
                 <a-form-item name="status" label="到场状态">
-                    <a-radio-group name="sigin" default-value="0" v-model:value="addForm.status">
+                    <a-radio-group name="status" default-value="0" v-model:value="addForm.status">
                         <a-radio value="0">
                             未到场
                         </a-radio>
@@ -78,6 +86,9 @@
                         </a-radio>
                         <a-radio value="1">
                             还礼
+                        </a-radio>
+                        <a-radio value="2">
+                            小孩收礼
                         </a-radio>
                     </a-radio-group>
                 </a-form-item>
@@ -192,7 +203,7 @@ export default {
                             }
                         });
                     })
-                    .catch(() => { });
+                    .catch((e: any) => { console.log(e) });
             }
         }
 
